@@ -1,0 +1,71 @@
+clearscreen.		limpiar pantalla
+lock throttle to 1.0		valor entre 0 y 1
+lock deja la variable pegada al valor incluso si éste cambia, set la deja fija
+SET SHIP:CONTROL:PILOTMAINTHROTTLE TO 0.		Valor de throttle de usuario, cuando corta el script
+when CONDICION then {	la condicion tiene que terminarse para que pase?
+wait until	COND.		para el script hasta que
+EFECTO
+}
+until CONDICION {
+EFECTO
+}
+set CurrentTime to time:seconds.	time:seconds da el tiempo actual en ese momento
+heading(a,b).		A es orientacion, B pitch respecto al horizonte
+lock steering to mysteer.
+ship:apoapsis		valor de apoapsis en metros
+set mysteer (nombre de variable) to heading (a,b).
+vang(a,b) 			angulo entre vectores
+ship:velocity:surface	velocidad vectorial de superficie
+ship:facing:forevector	vector de direccion progrado
+SHIP:FACING.		vector de progrado tambien?
+ship:orbit:apoapsis.		
+ship:orbit:periapsis. 	// shows the ship's periapsis
+ship:orbit:period. 		// shows the ship's period
+ship:orbit:inclination. 	// shows the ship's inclination
+ship:orbit:eccentricity.	// shows the ship's eccentricity
+ship:orbit:semimajoraxis. 	// shows the ship's semimajoraxis
+:mag			cambiar valor a escalar
+print A at (a,b)		presenta el valor de A en posicion de la pantalla
+SHIP:LIQUIDFUEL < A	autodescriptivo
+set ValueList to list(Value1, Value2, Value3, Value4, Value5).		array
+list[2]			es el tercero de la lista
+for x in list  {
+	y=y+x
+}
+SET pitchUp30 to ANGLEAXIS(-30,SHIP:STARFACING).
+
+Function cosa1 {
+  Parameter A.
+  Parameter B.
+
+	texto....
+}
+NO MEZCLAR when con until
+clearscreen.
+lock throttle to 1.
+lock x to ship:altitude/1000.
+lock b to -0.0006*x^3+0.06667*x^2-3.2931*x+90.
+lock a to heading(90,b).
+lock steering to a.
+stage.
+wait until ship:altitude>10000.
+lock steering to srfprograde.
+wait until ship:apoapsis>71000.
+lock throttle to 0.
+wait 1.
+stage.
+set acc to ship:maxthrust/ship:mass.
+lock v to ship:velocity:orbit:mag.
+lock difv to 2270-v.
+lock circburntime to difv/acc.
+wait until eta:apoapsis<circburntime*0.5.
+lock steering to heading(90,0).
+until ship:periapsis>70400  {
+	lock throttle to 1.
+}
+
+functions POSITIONAT and VELOCITYAT:
+At time t, your position p is given by POSIITONAT(SHIP,t).
+
+
+><  [ ]  {}
